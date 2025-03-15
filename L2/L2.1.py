@@ -1,3 +1,3 @@
-print('True')
+print('Trutye')
 print('True+')
-print('True123')
+print('True12d3')
