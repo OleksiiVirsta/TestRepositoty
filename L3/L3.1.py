@@ -2,8 +2,6 @@
 a = int(input('First number: '))
 b = input('Operations: ')
 c = int(input('Second number: '))
-# if b == '/' and c == 0:
-#     print('Error zerro')
 
 if b == '+':
     print(a, b, c, '=', (a+c))
