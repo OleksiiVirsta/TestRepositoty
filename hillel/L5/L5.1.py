@@ -9,7 +9,7 @@ elif any(c.isupper() for c in user_name):
     print(False)
 elif any(c in string.punctuation.replace("_", "") or c.isspace() for c in user_name):
     print(False)
-elif user_name.count('_') >= 2:
+elif "__" in user_name:
     print(False)
 elif user_name in keyword.kwlist:
     print(False)
