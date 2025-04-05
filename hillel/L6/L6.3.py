@@ -1,17 +1,12 @@
 import math
 
-a = '999'
+a = int(input('Enter number: '))
 
-lst = []
-res = int(a)
+while a > 9:
+    digits = [int(el) for el in str(a)]
+    a = math.prod(digits)
 
-while res <= 9:
-    for el in a:
-        d = el
-        lst.append(d)
-    res = math.prod(lst)
-
-print(res)
+print(a)
 
 
 
