@@ -1,3 +1,0 @@
-stop satura
-start
-стоп слово
