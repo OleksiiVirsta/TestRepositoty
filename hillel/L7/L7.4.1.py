@@ -7,6 +7,6 @@ def common_elements():
     set2 = set(d)
     inter = set1.intersection(set2)
 
-    return (inter)
+    return inter
 
 print(common_elements())
