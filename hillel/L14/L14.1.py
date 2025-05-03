@@ -1,46 +1,76 @@
 class StudentError(Exception):
     pass
 
-class Counter:
+class Human:
 
-   def __init__(self, current=1, min_value=0, max_value=10):
-       self.current = current
-       self.min_value = min_value
-       self.max_value = max_value
+    def __init__(self, gender, age, first_name, last_name):
+        self.gender = gender
+        self.age = age
+        self.first_name = first_name
+        self.last_name = last_name
 
-   def set_current(self, start):
-       self.current = start
+    def __str__(self):
+        return f' Name:{self.first_name}\n Surname:{self.last_name}\n Age:{self.age}'
 
-   def set_max(self, max_max):
-        self.max_value = max_max
+class Student(Human):
 
-   def set_min(self, min_min):
-       self.min_value = min_min
+    def __init__(self, gender, age, first_name, last_name, record_book):
+        super().__init__(gender, age, first_name, last_name)
+        self.record_book = record_book
 
-   def step_up(self):
-       if self.max_value <= self.get_current():
-           raise StudentError('Досягнутий максимум')
-       else:
-           self.current += 1
+    def __str__(self):
+        return f'{super().__str__()}\n Book:{self.record_book}'
 
-   def step_down(self):
-       if self.min_value >= self.get_current():
-           raise StudentError('Досягнутий мінімум')
-       else:
-           self.current -= 1
+class Group:
 
-   def get_current(self):
-       return self.current
+    def __init__(self, number):
+        self.number = number
+        self.group = set()
 
-counter = Counter()
-counter.set_current(7)
-counter.step_up()
-counter.step_up()
-counter.step_up()
-assert counter.get_current() == 10, 'Test1'
+    def add_student(self, student):
+        n = 0
+        for st in self.group:
+            n += 1
+        if n >= 2:
+            raise StudentError('Забагато')
+        else:
+            self.group.add(student)
+
+    def delete_student(self, last_name):
+        student = self.find_student(last_name)
+        if student is None:
+            return 'No student!'
+        else:
+            self.group.remove(student)
+
+    def find_student(self, last_name):
+        for student in self.group:
+            if student.last_name == last_name:
+                return student
+        return None
+
+    def __str__(self):
+        all_students = ''
+        n = 0
+        for st in self.group:
+            all_students += f'\nStudent: {st.first_name} {st.last_name}'
+            n += 1
+        if n == 0:
+            return f'In group {self.number} not have students!'
+        elif n == 1:
+            return f'Only one student!'
+        else:
+            return f'In group {self.number} have {n} students:{all_students}'
+
+st1 = Student('Male', 30, 'Steve', 'Jobs', 'AN142')
+st2 = Student('Female', 25, 'Liza', 'Taylor', 'AN145')
+st3 = Student('Female', 26, 'Lia', 'Tayor', 'AN45')
+# print(st1)
+gr = Group('PD1')
+gr.add_student(st1)
+gr.add_student(st2)
 try:
-    counter.step_up()
+    gr.add_student(st3)
 except StudentError as e:
     print(e)
-assert counter.get_current() == 10, 'Test2'
-print('Ok')
+print(gr)
