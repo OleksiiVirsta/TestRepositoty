@@ -12,3 +12,7 @@ assert gr.find_student('Jobs2') is None
 
 gr.delete_student('Taylor')
 print(gr) # Only one student
+if st1 == st2:
+    print(True)
+else:
+    print(False)
