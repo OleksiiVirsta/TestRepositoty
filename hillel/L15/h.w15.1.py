@@ -1,3 +1,5 @@
+import numbers
+
 class Rectangle:
 
     def __init__(self, width, height):
@@ -13,23 +15,27 @@ class Rectangle:
         return NotImplemented
 
     def __add__(self, other):
-        a = self.get_square() + other.get_square()
-        for number in range(2, a):
-            if a % number == 0:
-                c = a // number
-                break
-        return Rectangle(number, c)
+        if isinstance(other, Rectangle):
+            a = self.get_square() + other.get_square()
+            for number in range(2, a):
+                if a % number == 0:
+                    c = a // number
+                    break
+            return Rectangle(number, c)
+        return NotImplemented
 
     def __mul__(self, n):
-        a = self.get_square() * n
-        for number in range(2, a):
-            if a % number == 0:
-                c = a // number
-                break
-        return Rectangle(number, c)
+        if isinstance(n, numbers.Real):
+            a = self.get_square() * n
+            for number in range(2, a):
+                if a % number == 0:
+                    c = a // number
+                    break
+            return Rectangle(number, c)
+        return NotImplemented
 
     def __str__(self):
-        return f'Rectangle(width={self.width},height{self.height})'
+        return f'Rectangle({self.width},{self.height})'
 
 
 r1 = Rectangle(2, 4)
